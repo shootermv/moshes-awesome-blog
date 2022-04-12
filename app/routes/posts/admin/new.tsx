@@ -2,13 +2,13 @@ import { Form } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 
 import { createPost } from "~/models/post.server";
-
-export const action = async ({ request }) => {
+export type { Post } from "@prisma/client";
+export const action = async ({ request }: {request: any}) => {
   const formData = await request.formData();
 
-  const title = formData.get("title");
-  const slug = formData.get("slug");
-  const markdown = formData.get("markdown");
+  const title: string = formData.get("title");
+  const slug: string = formData.get("slug");
+  const markdown: string = formData.get("markdown");
 
   await createPost({ title, slug, markdown });
 
